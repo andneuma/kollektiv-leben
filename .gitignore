@@ -15,3 +15,9 @@
 # Ignore VIM files
 *~
 *.swp
+
+# Ignore application configuration
+/config/application.yml
+
+# Ignore tag file
+tags
