@@ -1,5 +1,5 @@
 require 'simplecov'
-
+require "codeclimate-test-reporter"
 SimpleCov.start 'rails'
 
 RSpec.configure do |config|
