@@ -8,3 +8,8 @@ test:
   database: travis_ci_test
 notifications:
   email: false
+addons:
+  code_climate:
+    repo_token: f4e1e18e540b182ef5d4fc4ec5fbf862502c3544441d6672158bd759fd3d6f3b
+after_success:
+  - bundle exec codeclimate-test-reporter

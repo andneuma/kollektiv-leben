@@ -34,6 +34,9 @@ group :test do
   gem 'poltergeist'
   gem 'selenium-webdriver'
   gem 'guard-rspec'
+  gem 'simplecov', require: false
+  gem 'coveralls'
+  gem "codeclimate-test-reporter", "~> 1.0.0"
 end
 
 group :development, :test do

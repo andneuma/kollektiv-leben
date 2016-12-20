@@ -21,3 +21,6 @@
 
 # Ignore tag file
 tags
+
+# Ignore coverage data
+coverage
