@@ -3,7 +3,7 @@ describe TodoList do
     it { should be_invalid }
   end
 
-  describe 'Todolist with name' do
+  context 'Todolist with name' do
     let(:todolist) { TodoList.new(name: 'SampleList') }
     subject { todolist }
 
