@@ -7,6 +7,8 @@ class CreateTodoItems < ActiveRecord::Migration
       t.date :end_date
       t.boolean :completed
 
+      t.references :todo_list, index: true, foreign_key: true
+
       t.timestamps null: false
     end
   end
