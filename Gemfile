@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+# Source 'https://rubygems.org'
 
 gem 'rails', '4.2.6'
 
@@ -31,7 +31,6 @@ group :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'capybara-screenshot'
-  gem 'factory_girl_rails'
   gem 'poltergeist'
   gem 'selenium-webdriver'
   gem 'guard-rspec'
@@ -42,6 +41,7 @@ end
 
 group :development, :test do
   gem 'byebug'
+  gem 'factory_girl_rails'
 end
 
 group :development do
