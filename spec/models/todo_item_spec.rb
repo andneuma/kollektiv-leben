@@ -3,8 +3,8 @@ describe TodoItem do
     expect(TodoItem.new).to be_invalid
   end
 
-  let(:todo_list) { TodoList.new(name: 'TestTodoList') }
-  let(:todo_item) { TodoItem.new(name: 'TestTodo', description: 'Something todo', start_date: Date.today, end_date: Date.today + 1.days) }
+  let(:todo_list) { create(:todo_list) }
+  let(:todo_item) { create(:todo_item) }
   subject { todo_item }
 
   it 'should not be completed by default' do
@@ -27,17 +27,12 @@ describe TodoItem do
   end
 
   it 'can references to parent todo list' do
-    todo_list.save
-    todo_list.todo_items.create(name: 'AnotherTestTodo', description: 'Something todo', start_date: Date.today, end_date: Date.today + 1.days)
-    another_test_todo = TodoItem.find_by(name: 'AnotherTestTodo')
-    expect(todo_list.todo_items).to include(another_test_todo)
+    new_todo = todo_list.todo_items.create(name: 'AnotherTestTodo', description: 'Something todo', start_date: Date.today, end_date: Date.today + 1.days)
+    expect(todo_list.todo_items).to include new_todo
   end
 
   it 'should become destroyed if parent todolist becomes destroyed' do
-    todo_list.save
-    todo_list.todo_items.create(name: 'AnotherTestTodo', description: 'Something todo', start_date: Date.today, end_date: Date.today + 1.days)
-    another_test_todo = TodoItem.find_by(name: 'AnotherTestTodo')
-    todo_list.destroy!
-    expect(TodoItem.all).not_to include(another_test_todo)
+    todo_item.todo_list.destroy!
+    expect(TodoItem.all).not_to include todo_item
   end
 end
