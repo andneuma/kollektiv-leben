@@ -93,4 +93,13 @@ describe TodoItemsController do
       it 'no description has been supplied'
     end
   end
+
+  context 'GET #destroy' do
+    it 'should be possible to destroy todo items' do
+      get :destroy, todo_list_id: todo_list.id, id: todo_items.first.id
+      expect(TodoItem.all).not_to include(todo_items.first)
+      expect(flash[:warning]).to eq('Aufgabe gelöscht!')
+      expect(response).to redirect_to todo_list_url(todo_list)
+    end
+  end
 end

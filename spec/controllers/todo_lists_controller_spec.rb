@@ -1,5 +1,5 @@
 describe TodoListsController do
-  let(:todo_list) { FactoryGirl.create(:todo_list) }
+  let(:todo_list) { create :todo_list }
 
   context 'GET #index' do
     it 'provides an array of todo lists' do
@@ -35,7 +35,7 @@ describe TodoListsController do
       get :new
       expect(response).to render_template :new
     end
-  end
+    end
 
   context 'GET #edit' do
     it 'assigns the proper todo list to @todo_list' do
@@ -76,6 +76,15 @@ describe TodoListsController do
     it 'rejects updating todo list if attributes passed are invalid' do
       patch :update, id: todo_list.id, todo_list: FactoryGirl.attributes_for(:todo_list, name: 'A') 
       expect(TodoList.find(todo_list.id).name).to eq('TestList')
+    end
+  end
+
+  context 'GET #destroy' do
+    it 'should be possible to destroy todo lists' do
+      get :destroy, id: todo_list.id
+      expect(TodoList.all).not_to include(todo_list)
+      expect(flash[:warning]).to eq('Liste gelöscht!')
+      expect(response).to redirect_to todo_lists_url
     end
   end
 end
