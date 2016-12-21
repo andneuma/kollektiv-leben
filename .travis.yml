@@ -5,7 +5,7 @@ rvm:
   - 2.3.0
 test:
   adapter: postgresql
-  database: travis_ci_test
+  database: kollektiv-leben_test
 notifications:
   email: false
 addons:
