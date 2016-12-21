@@ -317,6 +317,7 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.5)
     tilt (2.0.5)
+    timeliness (0.3.8)
     tins (1.13.0)
     travis (1.8.4)
       backports
@@ -339,6 +340,8 @@ GEM
     unicorn (5.2.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
+    validates_timeliness (4.0.2)
+      timeliness (~> 0.3.7)
     web-console (2.3.0)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
@@ -392,6 +395,7 @@ DEPENDENCIES
   travis
   turbolinks
   unicorn
+  validates_timeliness
   web-console (~> 2.0)
 
 BUNDLED WITH

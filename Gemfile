@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+# Source 'https://rubygems.org'
 
 gem 'rails', '4.2.6'
 
@@ -24,13 +24,13 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'validates_timeliness'
 
 group :test do
   gem 'database_cleaner'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'capybara-screenshot'
-  gem 'factory_girl_rails'
   gem 'poltergeist'
   gem 'selenium-webdriver'
   gem 'guard-rspec'
@@ -41,6 +41,7 @@ end
 
 group :development, :test do
   gem 'byebug'
+  gem 'factory_girl_rails'
 end
 
 group :development do
