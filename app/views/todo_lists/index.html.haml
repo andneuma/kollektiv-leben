@@ -1,0 +1,19 @@
+%h1 Listing todo_lists
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @todo_lists.each do |todo_list|
+      %tr
+        %td= link_to 'Show', todo_list
+        %td= link_to 'Edit', edit_todo_list_path(todo_list)
+        %td= link_to 'Destroy', todo_list, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Todo list', new_todo_list_path
