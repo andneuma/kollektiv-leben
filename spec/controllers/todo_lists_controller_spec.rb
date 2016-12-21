@@ -1,5 +1,5 @@
 describe TodoListsController do
-  let(:todo_list) { FactoryGirl.create(:todo_list) }
+  let(:todo_list) { create :todo_list }
 
   context 'GET #index' do
     it 'provides an array of todo lists' do
@@ -35,7 +35,7 @@ describe TodoListsController do
       get :new
       expect(response).to render_template :new
     end
-  end
+    end
 
   context 'GET #edit' do
     it 'assigns the proper todo list to @todo_list' do

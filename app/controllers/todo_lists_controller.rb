@@ -1,10 +1,11 @@
 class TodoListsController < ApplicationController
+  before_action :get_todo_list, only: [:show, :edit, :update]
+
   def index
     @todo_lists = TodoList.all
   end
 
   def show
-    @todo_list = TodoList.find(params[:id])
   end
 
   def new
@@ -23,11 +24,9 @@ class TodoListsController < ApplicationController
   end
 
   def edit
-    @todo_list = TodoList.find(params[:id])
   end
 
   def update
-    @todo_list = TodoList.find(params[:id])
     if @todo_list.update_attributes(todo_list_params)
       flash[:success] = 'Liste erfolgreich geändert!'
       redirect_to :todo_lists
@@ -38,6 +37,10 @@ class TodoListsController < ApplicationController
   end
 
   private
+
+  def get_todo_list
+    @todo_list = TodoList.find(params[:id])
+  end
 
   def todo_list_params
     params.require(:todo_list).permit(:name, :description)
