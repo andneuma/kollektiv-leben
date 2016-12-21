@@ -15,8 +15,6 @@ gem 'jquery-datatables-rails', '~> 3.4.0'
 gem 'jquery-ui-rails'
 gem 'bootsy'
 gem 'travis'
-gem 'ruby-debug-ide'
-gem 'debase'
 gem 'figaro'
 gem 'bcrypt'
 gem 'sass-rails', '~> 5.0'
@@ -41,8 +39,8 @@ group :test do
 end
 
 group :development, :test do
-  gem 'byebug'
   gem 'factory_girl_rails'
+  gem 'pry-byebug'
 end
 
 group :development do

@@ -54,14 +54,6 @@ describe TodoItemsController do
       expect(flash[:success]).to eq('Neue Aufgabe erfolgreich angelegt!')
       expect(response).to redirect_to todo_list_url(todo_list)
     end
-
-    context 'should return proper error messages if' do
-      it 'dates are malformatted'
-      it 'start_date is behind end_date'
-      it 'name is too short'
-      it 'name is too long'
-      it 'no description has been supplied'
-    end
   end
 
   context 'GET #edit' do
@@ -76,21 +68,13 @@ describe TodoItemsController do
     end
   end
 
-  context 'PATH #update' do
+  context 'PATCH #update' do
     it 'should accept updates for correct values passed' do
       patch :update, todo_list_id: todo_list.id, id: todo_items.first.id, todo_item: { name: 'SomeChange' } 
 
       expect(todo_items.first.reload.name).to eq('SomeChange')
       expect(flash[:success]).to eq('Änderungen erfolgreich übernommen!')
       expect(response).to redirect_to todo_list_url(todo_list)
-    end
-
-    context 'should return proper error messages if' do
-      it 'dates are malformatted'
-      it 'start_date is behind end_date'
-      it 'name is too short'
-      it 'name is too long'
-      it 'no description has been supplied'
     end
   end
 
