@@ -1,6 +1,6 @@
 class TodoItemsController < ApplicationController
   before_action :set_todo_list
-  before_action :set_todo_item, only: [:show, :edit, :update]
+  before_action :set_todo_item, only: [:show, :edit, :update, :destroy]
 
   def index
     @todo_items = @todo_list.todo_items
@@ -39,6 +39,12 @@ class TodoItemsController < ApplicationController
   end
 
   def destroy
+    if @todo_item.destroy
+      flash[:warning] = 'Aufgabe gelöscht!'
+    else
+      flash[:danger] = 'Ooops, etwas ist schiefgegangen, bitte kontaktiere den_die Administrator_in!!'
+    end
+    redirect_to todo_list_path(@todo_list)
   end
 
   private

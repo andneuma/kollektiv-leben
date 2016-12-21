@@ -78,4 +78,13 @@ describe TodoListsController do
       expect(TodoList.find(todo_list.id).name).to eq('TestList')
     end
   end
+
+  context 'GET #destroy' do
+    it 'should be possible to destroy todo lists' do
+      get :destroy, id: todo_list.id
+      expect(TodoList.all).not_to include(todo_list)
+      expect(flash[:warning]).to eq('Liste gelöscht!')
+      expect(response).to redirect_to todo_lists_url
+    end
+  end
 end

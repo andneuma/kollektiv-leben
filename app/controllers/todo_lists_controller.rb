@@ -1,5 +1,5 @@
 class TodoListsController < ApplicationController
-  before_action :get_todo_list, only: [:show, :edit, :update]
+  before_action :get_todo_list, only: [:show, :edit, :update, :destroy]
 
   def index
     @todo_lists = TodoList.all
@@ -34,6 +34,15 @@ class TodoListsController < ApplicationController
       flash[:danger] = @todo_list.errors.full_messages
       render :edit
     end
+  end
+
+  def destroy
+    if @todo_list.destroy
+      flash[:warning] = 'Liste gelöscht!'
+    else
+      flash[:danger] = 'Ooops, etwas ist schiefgegangen, bitte kontaktiere den_die Administrator_in!!'
+    end
+    redirect_to todo_lists_url
   end
 
   private
