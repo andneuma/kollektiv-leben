@@ -1,4 +1,10 @@
 class Group < ActiveRecord::Base
+  # Validation
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }, if: 'email.present?'
+  validates :name,
+    presence: true,
+    length: { minimum: 3, maximum: 40 }
+
   # Associations
   has_many :members, dependent: :destroy
   has_many :todo_lists
@@ -20,13 +26,10 @@ class Group < ActiveRecord::Base
     SecureRandom.urlsafe_base64(36)
   end
 
-  def create_digest_for(attribute:)
-    token = generate_secure_token
+  def generate_password_reset_digest
+    self.password_reset_token = generate_secure_token
     cost = Rails.env == "production" ? BCrypt::Engine::MAX_SALT_LENGTH : 4
-    digest = BCrypt::Password.create(token, cost: cost)
-
-    self.send("#{attribute}_token=", token)
-    self.send("#{attribute}_digest", digest)
+    self.password_reset_digest = BCrypt::Password.create(password_reset_token, cost: cost)
   end
 
   def generate_registration_tokens
