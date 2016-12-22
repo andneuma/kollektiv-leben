@@ -1,5 +1,4 @@
-class TodoList < ActiveRecord::Base
-  has_many :todo_items, dependent: :destroy
+class Member < ActiveRecord::Base
   belongs_to :group
 
   validates :name,

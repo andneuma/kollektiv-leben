@@ -55,12 +55,12 @@ describe TodoItemsController do
       expect(response).to redirect_to todo_list_url(todo_list)
     end
 
-    context 'should return proper error messages if' do
-      it 'dates are malformatted'
-      it 'start_date is behind end_date'
-      it 'name is too short'
-      it 'name is too long'
-      it 'no description has been supplied'
+    it 'should reject a todo item if attributes are invalid and render :new template' do
+      expect {
+        post :create, todo_list_id: todo_list.id, todo_item: { name: "AA", password: "secret", password_confirmation: "secret" }
+      }.to change(TodoItem, :count).by(0)
+      expect(flash[:danger]).to_not be nil
+      expect(response).to render_template :new
     end
   end
 
@@ -76,7 +76,7 @@ describe TodoItemsController do
     end
   end
 
-  context 'PATH #update' do
+  context 'PATCH #update' do
     it 'should accept updates for correct values passed' do
       patch :update, todo_list_id: todo_list.id, id: todo_items.first.id, todo_item: { name: 'SomeChange' } 
 
@@ -85,12 +85,10 @@ describe TodoItemsController do
       expect(response).to redirect_to todo_list_url(todo_list)
     end
 
-    context 'should return proper error messages if' do
-      it 'dates are malformatted'
-      it 'start_date is behind end_date'
-      it 'name is too short'
-      it 'name is too long'
-      it 'no description has been supplied'
+    it 'should reject update if values passed are incorrect and render :edit template' do
+      patch :update, todo_list_id: todo_list.id, todo_item: { name: "AA" }, id: todo_items.first.id
+      expect(flash[:danger]).to_not be nil
+      expect(response).to render_template :edit
     end
   end
 
