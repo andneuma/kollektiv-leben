@@ -15,10 +15,17 @@ describe GroupsController do
 
   context 'POST #create' do
     it 'should allow creating new group if registration token is valid' do
+      create_list :group, 2
+      token = Group.first.registration_tokens.first
+
       expect {
-        post :create, group: attributes_for(:group), registration_token: group.registration_tokens.first
-      }.to change(Group, :count).by(1)
+        post :create, group: { name: "test", email: "test@test.com", password: "secret", password_confirmation: "secret" } , registration_token: token
+      }.to change(Group, :count).from(2).to(3)
+      expect(flash[:success]).to eq('Gruppe erfolgreich angelegt, ihr könnt euch nun einloggen!')
+      expect(response).to redirect_to login_url
     end
+
+    it 'should not set login status for newly created groups'
 
     it 'should not allow creating new group if registration token is not valid' do
       expect {
@@ -77,6 +84,13 @@ describe GroupsController do
         patch :update, id: group.id, group: { name: 'SomeOtherName' }
         expect(response).to redirect_to login_url
         expect(group.name).to_not eq('SomeOtherName')
+      end
+
+      it 'if values not valid' do
+        session[:group_id] = group.id
+        patch :update, id: group.id, group: { name: 'AA' }
+        expect(response).to render_template :edit
+        expect(flash[:danger]).to_not be_nil
       end
 
       it 'if trying to update attributes of different group' do

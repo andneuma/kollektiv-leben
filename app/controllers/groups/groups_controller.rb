@@ -11,8 +11,8 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
 
     if @group.save
-      flash[:success] = 'Gruppe erfolgreich angelegt!'
-      redirect_to root_url
+      flash[:success] = 'Gruppe erfolgreich angelegt, ihr könnt euch nun einloggen!'
+      redirect_to login_url
     else
       flash[:danger] = @group.errors.full_messages
       render :new

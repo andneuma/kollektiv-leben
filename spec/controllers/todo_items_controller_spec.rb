@@ -54,6 +54,14 @@ describe TodoItemsController do
       expect(flash[:success]).to eq('Neue Aufgabe erfolgreich angelegt!')
       expect(response).to redirect_to todo_list_url(todo_list)
     end
+
+    it 'should reject a todo item if attributes are invalid and render :new template' do
+      expect {
+        post :create, todo_list_id: todo_list.id, todo_item: { name: "AA", password: "secret", password_confirmation: "secret" }
+      }.to change(TodoItem, :count).by(0)
+      expect(flash[:danger]).to_not be nil
+      expect(response).to render_template :new
+    end
   end
 
   context 'GET #edit' do
@@ -75,6 +83,12 @@ describe TodoItemsController do
       expect(todo_items.first.reload.name).to eq('SomeChange')
       expect(flash[:success]).to eq('Änderungen erfolgreich übernommen!')
       expect(response).to redirect_to todo_list_url(todo_list)
+    end
+
+    it 'should reject update if values passed are incorrect and render :edit template' do
+      patch :update, todo_list_id: todo_list.id, todo_item: { name: "AA" }, id: todo_items.first.id
+      expect(flash[:danger]).to_not be nil
+      expect(response).to render_template :edit
     end
   end
 
