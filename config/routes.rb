@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'todo_list#index'
+  root to: 'todo_lists#index'
 
   get '/register', to: 'groups#new', as: :register_group
   post '/register', to: 'groups#create'
