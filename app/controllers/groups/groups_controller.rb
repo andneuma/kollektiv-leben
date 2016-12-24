@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
 
     if @group.save
-      flash[:success] = 'Gruppe erfolgreich angelegt, ihr könnt euch nun einloggen!'
+      flash[:success] = t('.created')
       redirect_to login_url
     else
       flash[:danger] = @group.errors.full_messages
@@ -26,7 +26,7 @@ class GroupsController < ApplicationController
   def update
     @group = Group.find(params[:id])
     if @group.update_attributes(group_params)
-      flash[:success] = "Änderungen erfolgreich übernommen"
+      flash[:success] = t('.updated')
       redirect_to edit_group_url(@group)
     else
       flash[:danger] = @group.errors.full_messages
@@ -58,7 +58,7 @@ class GroupsController < ApplicationController
     if token && token_valid?(token)
       remove_from_registration_tokens token
     else
-      flash[:danger] = 'Registrierungs-Code ungültig oder nicht angegeben!'
+      flash[:danger] = t('groups.create.invalid_reg_code')
       render :new
     end
   end
@@ -70,7 +70,7 @@ class GroupsController < ApplicationController
 
   def require_login
     unless session[:group_id]
-      flash[:danger] = 'Bitte zuerst einloggen!'
+      flash[:danger] = t('session.login_first')
       redirect_to login_url
     end
   end

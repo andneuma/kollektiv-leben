@@ -1,0 +1,7 @@
+de:
+  activerecord:
+    attributes:
+      group:
+      member:
+      todo_list:
+      todo_item:
