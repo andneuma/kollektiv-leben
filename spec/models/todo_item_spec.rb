@@ -38,6 +38,6 @@ describe TodoItem do
 
   context 'associations' do
     it { should belong_to(:todo_list) }
-    it { should have_and_belong_to_many(:members) }
+    it { should have_many(:members) }
   end
 end

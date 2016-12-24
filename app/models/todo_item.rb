@@ -1,5 +1,6 @@
 class TodoItem < ActiveRecord::Base
   belongs_to :todo_list
+  has_many :members, through: :members_todo_items
 
   validates :name,
     presence: true,
