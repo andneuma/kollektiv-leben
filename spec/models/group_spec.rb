@@ -17,6 +17,12 @@ describe Group do
     expect(group).to be_valid
   end
 
+  context 'associations' do
+    it { should have_many(:todo_lists) }
+    it { should have_many(:todo_items) }
+    it { should have_many(:members) }
+  end
+
   context 'name' do
     it 'should be present' do
       group.name = nil

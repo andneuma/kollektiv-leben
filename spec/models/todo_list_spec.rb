@@ -1,4 +1,9 @@
 describe TodoList do
+  context 'associations' do
+    it { should belong_to(:group) }
+    it { should have_many(:todo_items) }
+  end
+
   context 'Empty todolist' do
     it { should be_invalid }
   end

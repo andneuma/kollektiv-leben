@@ -8,6 +8,10 @@ describe Member do
     expect(Member.all).not_to include(member)
   end
 
+  context 'associations' do
+    it { should belong_to(:group) }
+  end
+
   context 'name' do
     it 'should have more than 2 characters' do
       member.name = "AA"

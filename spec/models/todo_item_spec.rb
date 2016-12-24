@@ -35,4 +35,9 @@ describe TodoItem do
     todo_item.todo_list.destroy!
     expect(TodoItem.all).not_to include todo_item
   end
+
+  context 'associations' do
+    it { should belong_to(:todo_list) }
+    it { should have_and_belong_to_many(:members) }
+  end
 end
