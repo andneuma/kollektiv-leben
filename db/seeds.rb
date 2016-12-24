@@ -11,7 +11,7 @@ Group.all.each do |group|
 
   # Add members
   (1..4).to_a.sample.times do
-    group.members.create(name: Faker::Name.name,
+    members = group.members.create(name: Faker::Name.name,
                          email: Faker::Internet.free_email)
   end
 
@@ -23,9 +23,11 @@ Group.all.each do |group|
 
   # Add todo items
   (1..4).to_a.sample.times do
-    group.todo_lists.first.todo_items.create(name: Faker::Hipster.sentence((1..3).to_a.sample),
-                                             description: Faker::Hipster.paragraph,
-                                             start_date: Date.today,
-                                             end_date: Date.today + 1.days )
+    todo_item = group.todo_lists.first.todo_items.create(name: Faker::Hipster.sentence((1..3).to_a.sample),
+                                                         description: Faker::Hipster.paragraph,
+                                                         start_date: Date.today,
+                                                         end_date: Date.today + 1.days )
+    members = group.members
+    todo_item.members = members.take (1..members.count).to_a.sample
   end
 end
