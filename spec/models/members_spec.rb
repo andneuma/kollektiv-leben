@@ -10,6 +10,7 @@ describe Member do
 
   context 'associations' do
     it { should belong_to(:group) }
+    it { should have_many(:todo_items) }
   end
 
   context 'name' do
