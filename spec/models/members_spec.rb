@@ -8,15 +8,12 @@ describe Member do
     expect(Member.all).not_to include(member)
   end
 
-  context 'name' do
-    it 'should have more than 2 characters' do
-      member.name = "AA"
-      expect(member).to be_invalid
-    end
+  context 'associations' do
+    it { should belong_to(:group) }
+    it { should have_many(:todo_items) }
+  end
 
-    it 'should not have more than 40 characters' do
-      member.name = 'A'*41
-      expect(member).to be_invalid
-    end
+  context 'name' do
+    it { should validate_length_of(:name) }
   end
 end

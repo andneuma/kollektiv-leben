@@ -25,7 +25,13 @@ describe GroupsController do
       expect(response).to redirect_to login_url
     end
 
-    it 'should not set login status for newly created groups'
+    it 'should not set login status for newly created groups' do
+      create_list :group, 2
+      token = Group.first.registration_tokens.first
+      post :create, group: { name: "test", email: "test@test.com", password: "secret", password_confirmation: "secret" } , registration_token: token
+
+      expect(session[:group_id]).to be_nil
+    end
 
     it 'should not allow creating new group if registration token is not valid' do
       expect {

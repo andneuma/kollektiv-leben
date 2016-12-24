@@ -35,12 +35,14 @@ group :test do
   gem 'guard-rspec'
   gem 'simplecov', require: false
   gem 'coveralls'
-  gem "codeclimate-test-reporter", "~> 1.0.0"
+  gem 'codeclimate-test-reporter', '~> 1.0.0'
+  gem 'shoulda'
 end
 
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry-byebug'
+  gem 'faker'
 end
 
 group :development do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161221232531) do
+ActiveRecord::Schema.define(version: 20161224173733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 20161221232531) do
     t.datetime "updated_at",            null: false
     t.string   "registration_tokens",                array: true
   end
+
+  create_table "member_todo_items", force: :cascade do |t|
+    t.integer  "member_id"
+    t.integer  "todo_item_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "member_todo_items", ["member_id"], name: "index_member_todo_items_on_member_id", using: :btree
+  add_index "member_todo_items", ["todo_item_id"], name: "index_member_todo_items_on_todo_item_id", using: :btree
 
   create_table "members", force: :cascade do |t|
     t.string   "email"
@@ -61,6 +71,8 @@ ActiveRecord::Schema.define(version: 20161221232531) do
 
   add_index "todo_lists", ["group_id"], name: "index_todo_lists_on_group_id", using: :btree
 
+  add_foreign_key "member_todo_items", "members"
+  add_foreign_key "member_todo_items", "todo_items"
   add_foreign_key "members", "groups"
   add_foreign_key "todo_items", "todo_lists"
   add_foreign_key "todo_lists", "groups"

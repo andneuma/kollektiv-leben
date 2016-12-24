@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'todo_list#index'
+  root to: 'todo_lists#index'
 
   get '/register', to: 'groups#new', as: :register_group
   post '/register', to: 'groups#create'
@@ -10,6 +10,14 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new', as: :login
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: :logout
+
+  resources :groups do
+    resources :members
+  end
+
+  resources :groups do
+    resources :todo_lists
+  end
 
   resources :todo_lists do
     resources :todo_items
