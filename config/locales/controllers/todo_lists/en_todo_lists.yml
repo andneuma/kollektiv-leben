@@ -1,2 +1,9 @@
 en:
   todo_lists:
+    create:
+      created: 'New todo list created!'
+    update:
+      updated: 'Changes accepted!'
+    destroy:
+      destroyed: 'Todo List deleted!'
+      error: 'Woooopsy, something weird happened... please contact the system adiminstrator!'

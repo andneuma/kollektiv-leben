@@ -2,6 +2,18 @@ en:
   activerecord:
     attributes:
       group:
+        name: 'Name'
+        email: 'Email'
+        registration_tokens: 'Registration codes'
       member:
+        name: 'Name'
+        email: 'Email'
       todo_list:
+        name: 'Name'
+        description: 'description'
       todo_item:
+        name: 'Name'
+        description: 'description'
+        start_date: 'start date'
+        end_date: 'end date'
+        completed: 'completed'

@@ -1,2 +1,9 @@
 de:
   todo_lists:
+    create:
+      created: 'Liste erstellt!'
+    update:
+      updated: 'Liste geändert!'
+    destroy:
+      destroyed: 'Liste gelöscht!'
+      error: 'Ooops, etwas ist schiefgegangen, bitte kontaktiere den_die Administrator_in!'

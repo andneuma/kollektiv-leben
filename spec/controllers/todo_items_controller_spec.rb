@@ -81,7 +81,7 @@ describe TodoItemsController do
       patch :update, todo_list_id: todo_list.id, id: todo_items.first.id, todo_item: { name: 'SomeChange' } 
 
       expect(todo_items.first.reload.name).to eq('SomeChange')
-      expect(flash[:success]).to eq('Änderungen erfolgreich übernommen!')
+      expect(flash[:success]).to eq('Änderungen übernommen!')
       expect(response).to redirect_to todo_list_url(todo_list)
     end
 

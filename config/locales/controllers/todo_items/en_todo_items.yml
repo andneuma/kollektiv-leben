@@ -1,2 +1,9 @@
 en:
   todo_items:
+    create:
+      created: 'New todo item created!'
+    update:
+      updated: 'Changes accepted!'
+    destroy:
+      destroyed: 'Todo item deleted!'
+      error: 'Wooopsy, something weird happened... please contact the system administrator!'
