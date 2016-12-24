@@ -14,14 +14,6 @@ describe Member do
   end
 
   context 'name' do
-    it 'should have more than 2 characters' do
-      member.name = "AA"
-      expect(member).to be_invalid
-    end
-
-    it 'should not have more than 40 characters' do
-      member.name = 'A'*41
-      expect(member).to be_invalid
-    end
+    it { should validate_length_of(:name) }
   end
 end

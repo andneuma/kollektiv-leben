@@ -11,33 +11,25 @@ describe TodoItem do
     expect(todo_item.completed).to be false
   end
 
-  it 'should not be valid if start date is behind end date' do
-    todo_item.end_date = Date.today - 1 
-    expect(todo_item).to be_invalid
+  # Validations
+  it { should validate_length_of(:name) }
+
+  context 'should be invalid' do
+    it 'if start date is behind end date' do
+      todo_item.end_date = Date.today - 1 
+      expect(todo_item).to be_invalid
+    end
   end
 
-  it 'should not be valid if name is too short' do
-    todo_item.name = "a"
-    expect(todo_item).to be_invalid
-  end
-
-  it 'should not be valid if name is too long' do
-    todo_item.name = "a"*41
-    expect(todo_item).to be_invalid
-  end
-
-  it 'can references to parent todo list' do
-    new_todo = todo_list.todo_items.create(name: 'AnotherTestTodo', description: 'Something todo', start_date: Date.today, end_date: Date.today + 1.days)
-    expect(todo_list.todo_items).to include new_todo
-  end
-
-  it 'should become destroyed if parent todolist becomes destroyed' do
-    todo_item.todo_list.destroy!
-    expect(TodoItem.all).not_to include todo_item
-  end
-
+  # Associations
   context 'associations' do
     it { should belong_to(:todo_list) }
+
+    it 'should become destroyed if parent todolist becomes destroyed' do
+      todo_item.todo_list.destroy!
+      expect(TodoItem.all).not_to include todo_item
+    end
+
     it { should have_many(:members) }
   end
 end

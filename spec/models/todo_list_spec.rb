@@ -1,27 +1,15 @@
 describe TodoList do
+  let(:todo_list) { FactoryGirl.build :todo_list }
+  subject { todo_list }
+
+  # Associations
   context 'associations' do
     it { should belong_to(:group) }
     it { should have_many(:todo_items) }
   end
 
-  context 'Empty todolist' do
-    it { should be_invalid }
-  end
+  # Validations
+  it { should be_valid }
+  it { should validate_length_of(:name) }
 
-  context 'Todolist with name' do
-    let(:todo_list) { FactoryGirl.build :todo_list }
-    subject { todo_list }
-
-    it { should be_valid }
-
-    it 'should be invalid if name too short' do
-      todo_list.name = 'a'
-      expect(todo_list).to be_invalid
-    end
-
-    it 'should be invalid if name too long' do
-      todo_list.name = 'a'*41
-      expect(todo_list).to be_invalid
-    end
-  end
 end
