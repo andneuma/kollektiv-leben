@@ -15,7 +15,7 @@ class TodoListsController < ApplicationController
   def create
     @todo_list = TodoList.new(todo_list_params)
     if @todo_list.save
-      flash[:success] = 'Liste erfolgreich angelegt!'
+      flash[:success] = t('.created')
       redirect_to :todo_lists
     else
       flash[:danger] = @todo_list.errors.full_messages
@@ -28,7 +28,7 @@ class TodoListsController < ApplicationController
 
   def update
     if @todo_list.update_attributes(todo_list_params)
-      flash[:success] = 'Liste erfolgreich geändert!'
+      flash[:success] = t('.updated')
       redirect_to :todo_lists
     else
       flash[:danger] = @todo_list.errors.full_messages
@@ -38,9 +38,9 @@ class TodoListsController < ApplicationController
 
   def destroy
     if @todo_list.destroy
-      flash[:warning] = 'Liste gelöscht!'
+      flash[:warning] = t('.destroyed')
     else
-      flash[:danger] = 'Ooops, etwas ist schiefgegangen, bitte kontaktiere den_die Administrator_in!!'
+      flash[:danger] = t('.error')
     end
     redirect_to todo_lists_url
   end

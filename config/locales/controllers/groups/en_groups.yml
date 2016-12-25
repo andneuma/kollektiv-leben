@@ -1,0 +1,9 @@
+en:
+  groups:
+    create:
+      created: 'Group successfully created, you can now login!'
+      invalid_reg_code: 'Registration code invalid or not supplied!'
+    update:
+      updated: 'Changes applied!'
+    destroy:
+      destroyed: 'Group deleted!'

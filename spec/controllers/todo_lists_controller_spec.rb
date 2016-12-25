@@ -55,7 +55,7 @@ describe TodoListsController do
         post :create, todo_list: FactoryGirl.attributes_for(:todo_list)
       }.to change(TodoList,:count).by(1)
       expect(response).to redirect_to :todo_lists
-      expect(flash[:success]).to  eq('Liste erfolgreich angelegt!') 
+      expect(flash[:success]).to  eq('Liste erstellt!') 
     end
 
     it 'rejects creating todo list if attributes passed are invalid' do
@@ -70,7 +70,7 @@ describe TodoListsController do
     it 'updates todo list under valid attribute values' do
       patch :update, id: todo_list.id, todo_list: FactoryGirl.attributes_for(:todo_list, name: 'AnotherName') 
       expect(TodoList.find(todo_list.id).name).to eq('AnotherName')
-      expect(flash[:success]).to eq('Liste erfolgreich geändert!')
+      expect(flash[:success]).to eq('Liste geändert!')
     end
 
     it 'rejects updating todo list if attributes passed are invalid' do

@@ -1,0 +1,19 @@
+de:
+  activerecord:
+    attributes:
+      group:
+        name: 'Name'
+        email: 'Email'
+        registration_tokens: 'Registrierungs-Codes'
+      member:
+        name: 'Name'
+        email: 'Email'
+      todo_list:
+        name: 'Name'
+        description: 'Beschreibung'
+      todo_item:
+        name: 'Name'
+        description: 'Beschreibung'
+        start_date: 'Beginn'
+        end_date: 'Ende'
+        completed: 'abgeschlossen'

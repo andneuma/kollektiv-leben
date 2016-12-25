@@ -6,8 +6,6 @@ gem 'pg'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'haml-rails'
 gem 'haml'
-gem 'globalize'
-gem 'globalize-accessors'
 gem 'rails-html-sanitizer'
 gem 'unicorn'
 gem 'rack-attack'
@@ -25,6 +23,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'validates_timeliness'
 gem 'rspec-its'
 
+gem 'globalize'
+gem 'globalize-accessors'
+gem 'translate-rails3', require: 'translate', group: :development
+
 group :test do
   gem 'database_cleaner'
   gem 'rspec-rails'
@@ -35,14 +37,13 @@ group :test do
   gem 'guard-rspec'
   gem 'simplecov', require: false
   gem 'coveralls'
-  gem 'codeclimate-test-reporter', '~> 1.0.0'
+  gem "codeclimate-test-reporter", "~> 1.0.0"
   gem 'shoulda'
 end
 
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry-byebug'
-  gem 'faker'
 end
 
 group :development do

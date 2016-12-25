@@ -17,7 +17,7 @@ class TodoItemsController < ApplicationController
     @todo_item = @todo_list.todo_items.build(todo_item_params)
 
     if @todo_item.save
-      flash[:success] = 'Neue Aufgabe erfolgreich angelegt!'
+      flash[:success] = t('.created')
       redirect_to todo_list_url(@todo_list)
     else
       flash[:danger] = @todo_item.errors.full_messages
@@ -30,7 +30,7 @@ class TodoItemsController < ApplicationController
 
   def update
     if @todo_item.update_attributes(todo_item_params)
-      flash[:success] = 'Änderungen erfolgreich übernommen!'
+      flash[:success] = t('.updated')
       redirect_to todo_list_path(@todo_list)
     else
       flash[:danger] = @todo_item.errors.full_messages
@@ -40,9 +40,9 @@ class TodoItemsController < ApplicationController
 
   def destroy
     if @todo_item.destroy
-      flash[:warning] = 'Aufgabe gelöscht!'
+      flash[:warning] = t('.destroyed')
     else
-      flash[:danger] = 'Ooops, etwas ist schiefgegangen, bitte kontaktiere den_die Administrator_in!!'
+      flash[:danger] = t('.error')
     end
     redirect_to todo_list_path(@todo_list)
   end

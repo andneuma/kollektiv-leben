@@ -1,0 +1,9 @@
+de:
+  todo_items:
+    create:
+      created: 'Neue Aufgabe erfolgreich angelegt!'
+    update:
+      updated: 'Änderungen übernommen!'
+    destroy:
+      destroyed: 'Aufgabe gelöscht!'
+      error: 'Ooops, etwas ist schiefgegangen, bitte kontaktiere den_die Administrator_in!'
