@@ -1,0 +1,8 @@
+%li.todo-item{todo_item_id: item.id}
+  = item.name
+  = link_to edit_todo_list_todo_item_path(id: item.id, todo_list_id: item.todo_list_id), remote: true do
+    .fa.fa-edit
+  = link_to todo_list_todo_item_path(id: item.id, todo_list_id: item.todo_list_id), method: :delete, data: { :confirm => 'Are you sure?' }, remote: true do
+    .fa.fa-trash-o
+  %br
+  %i.todo-item-description= item.description

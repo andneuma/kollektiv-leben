@@ -15,3 +15,17 @@
 //= require bootstrap.min
 //= require turbolinks
 //= require_tree .
+
+jQuery(function() {
+  jQuery('.todo-item a').hide();
+  jQuery('.todo-item .todo-item-description').hide();
+
+  jQuery('.todo-item').mouseover(function() {
+    jQuery(this).find('a').show();
+    jQuery(this).find('.todo-item-description').show();
+  });
+  jQuery('.todo-item').mouseout(function() {
+    jQuery(this).find('a').hide();
+    jQuery(this).find('.todo-item-description').hide();
+  });
+});

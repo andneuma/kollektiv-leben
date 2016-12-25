@@ -1,0 +1,2 @@
+var todoItemDiv = jQuery('li[todo_item_id=<%= @todo_item.id %>]');
+todoItemDiv.replaceWith("<%= j render partial: 'todo_item', locals: {item: @todo_item} %>");

@@ -1,0 +1,20 @@
+.panel.panel-default{todo_list_id: list.id}
+  .panel-heading
+    %h4.panel-title
+      %a.accordion-toggle{'data-parent' => '#accordion-panel', 'data-toggle' => 'collapse', href: "\##{list.id}"}
+        %b.todo-list-name= list.name
+        .pull-right
+          = link_to edit_todo_list_path(list), remote: true do
+            .fa.fa-edit
+          = link_to list, method: :delete, data: { :confirm => 'Are you sure?' }, remote: true do
+            .fa.fa-trash-o
+  .panel-collapse.collapse{id: list.id}
+    .panel-body
+      %i.todo-list-description= list.description
+      %hr
+      %ul.todo-items
+        - list.todo_items.each do |item|
+          = render 'todo_items/todo_item', item: item
+      = link_to new_todo_list_todo_item_path(todo_list_id: list.id), remote: true do
+        .fa.fa-plus-square
+        New Item

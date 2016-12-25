@@ -15,3 +15,27 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  color: #383838;
+}
+
+.modal-dialog {
+  z-index: 9999;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+.form-control {
+  margin: 3px 0;
+}
+
+.alert {
+  margin: 10px 0;
+}
+
+.todo-item-description {
+  font-size: 12px;
+}
