@@ -1,13 +1,21 @@
 describe MembersController do
+  context 'GET #index' do
+    it 'should populate all members in a group'
+    context 'reject index' do
+      it 'if not signed in'
+      it 'members of another group'
+    end
+  end
+
   context 'GET #new' do
     it 'should create new empty member'
-    it 'render :new template'
   end
 
   context 'POST #create' do
     it 'should allow creating new member if logged in'
-    context 'reject' do
-      it 'creating new member if not logged in'
+    context 'reject creating new member' do
+      it 'if not logged in'
+      it 'in another group'
     end
   end
 
@@ -30,9 +38,9 @@ describe MembersController do
 
   context 'DESTROY #destroy' do
     it 'should destroy members'
-    context 'reject destruction' do
+    context 'reject destroying member' do
       it 'if not logged in'
-      it 'if member not belonging to group'
+      it 'of another group'
     end
   end
 end
