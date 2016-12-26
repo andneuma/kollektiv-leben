@@ -38,4 +38,9 @@ textarea {
 
 .todo-item-description {
   font-size: 12px;
+  display: none;
+}
+
+.todo-item a {
+ display: none;
 }

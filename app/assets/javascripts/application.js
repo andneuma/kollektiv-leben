@@ -17,14 +17,11 @@
 //= require_tree .
 
 jQuery(function() {
-  jQuery('.todo-item a').hide();
-  jQuery('.todo-item .todo-item-description').hide();
-
-  jQuery('.todo-item').mouseover(function() {
+  jQuery(document).on('mouseover', '.todo-item', function(){
     jQuery(this).find('a').show();
     jQuery(this).find('.todo-item-description').show();
   });
-  jQuery('.todo-item').mouseout(function() {
+  jQuery(document).on('mouseout', '.todo-item', function(){
     jQuery(this).find('a').hide();
     jQuery(this).find('.todo-item-description').hide();
   });
