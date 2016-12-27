@@ -13,13 +13,10 @@ Rails.application.routes.draw do
 
   resources :groups do
     resources :members, except: :index
-  end
-
-  resources :groups do
     resources :todo_lists
   end
 
   resources :todo_lists do
-    resources :todo_items
+    resources :todo_items 
   end
 end
