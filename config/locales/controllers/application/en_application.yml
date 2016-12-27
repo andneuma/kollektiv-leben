@@ -1,0 +1,4 @@
+en:
+  application:
+    scope_to_current_group:
+      access_prohibited: 'Zugriff nicht erlaubt!'

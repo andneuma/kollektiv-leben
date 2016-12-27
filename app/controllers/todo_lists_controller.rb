@@ -1,23 +1,24 @@
 class TodoListsController < ApplicationController
+  before_action :check_if_signed_in
+  before_action :scope_to_current_group
   before_action :get_todo_list, only: [:show, :edit, :update, :destroy]
 
   def index
-    @todo_lists = TodoList.all
+    @todo_lists = @group.todo_lists.all
   end
 
   def new
-    @todo_list = TodoList.new
-    3.times { @todo_list.todo_items.build }
+    @todo_list = @group.todo_lists.new
     render 'form_modal'
   end
 
   def edit
-    3.times { @todo_list.todo_items.build }
+    @todo_list = @group.todo_lists.find(params[:id])
     render 'form_modal'
   end
 
   def create
-    @todo_list = TodoList.new(todo_list_params)
+    @todo_list = @group.todo_lists.build(todo_list_params)
     if !@todo_list.save
       render json: @todo_list.errors.full_messages.to_sentence, status: :unprocessable_entity
     end
@@ -38,7 +39,7 @@ class TodoListsController < ApplicationController
   private
 
   def get_todo_list
-    @todo_list = TodoList.find(params[:id])
+    @todo_list = @group.todo_lists.find(params[:id])
   end
 
   def todo_list_params
