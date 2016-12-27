@@ -22,6 +22,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'validates_timeliness'
 gem 'rspec-its'
+gem 'faker'
 
 gem 'globalize'
 gem 'globalize-accessors'
