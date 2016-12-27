@@ -2,49 +2,33 @@ class TodoItemsController < ApplicationController
   before_action :set_todo_list
   before_action :set_todo_item, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @todo_items = @todo_list.todo_items
-  end
-
   def new
     @todo_item = @todo_list.todo_items.new
-  end
-
-  def show
+    render 'form_modal'
   end
 
   def create
     @todo_item = @todo_list.todo_items.build(todo_item_params)
 
-    if @todo_item.save
-      flash[:success] = t('.created')
-      redirect_to todo_list_url(@todo_list)
-    else
-      flash[:danger] = @todo_item.errors.full_messages
-      render :new
+    if !@todo_item.save
+      render json: @todo_item.errors.full_messages.to_sentence, status: :unprocessable_entity
     end
   end
 
   def edit
+    render 'form_modal'
   end
 
   def update
-    if @todo_item.update_attributes(todo_item_params)
-      flash[:success] = t('.updated')
-      redirect_to todo_list_path(@todo_list)
-    else
-      flash[:danger] = @todo_item.errors.full_messages
-      render :edit
+    if !@todo_item.update_attributes(todo_item_params)
+      render json: @todo_item.errors.full_messages.to_sentence, status: :unprocessable_entity
     end
   end
 
   def destroy
-    if @todo_item.destroy
-      flash[:warning] = t('.destroyed')
-    else
-      flash[:danger] = t('.error')
+    if !@todo_item.destroy
+      flash[:danger] = 'Ooops, etwas ist schiefgegangen, bitte kontaktiere den_die Administrator_in!!'
     end
-    redirect_to todo_list_path(@todo_list)
   end
 
   private

@@ -10,6 +10,37 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require bootstrap.min
+ *= require bootstrap.techie
  *= require_tree .
  *= require_self
  */
+
+body {
+  color: #383838;
+}
+
+.modal-dialog {
+  z-index: 9999;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+.form-control {
+  margin: 3px 0;
+}
+
+.alert {
+  margin: 10px 0;
+}
+
+.todo-item-description {
+  font-size: 12px;
+  display: none;
+}
+
+.todo-item a {
+ display: none;
+}

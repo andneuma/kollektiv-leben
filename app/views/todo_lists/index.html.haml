@@ -1,19 +1,12 @@
-%h1 Listing todo_lists
+.row
+  .col-xs-12
+    %h1 To Do Lists
 
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
+    = link_to new_todo_list_path, remote: true do
+      .fa.fa-plus-square
+      New todo list
 
-  %tbody
-    - @todo_lists.each do |todo_list|
-      %tr
-        %td= link_to 'Show', todo_list
-        %td= link_to 'Edit', edit_todo_list_path(todo_list)
-        %td= link_to 'Destroy', todo_list, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Todo list', new_todo_list_path
+  .col-xs-12
+    #accordion-panel.panel-group
+      - @todo_lists.sort_by(&:created_at).reverse.each do |list|
+        = render 'todo_list', list: list

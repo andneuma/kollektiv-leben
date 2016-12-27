@@ -16,13 +16,13 @@ Group.all.each do |group|
   end
 
   # Add a todo list
-  group.todo_lists.create(name: Faker::Hipster.words(2),
+  group.todo_lists.create(name: Faker::Hipster.words(2).join(' '),
                           description: Faker::Hipster.paragraph,
                           notifications_enabled: [true, false].sample)
 
 
   # Add todo items
-  (1..4).to_a.sample.times do
+  (2..8).to_a.sample.times do
     todo_item = group.todo_lists.first.todo_items.create(name: Faker::Hipster.sentence((1..3).to_a.sample),
                                                          description: Faker::Hipster.paragraph,
                                                          start_date: Date.today,

@@ -1,0 +1,13 @@
+%nav.navbar.navbar-default{role: 'navigation'}
+  .navbar-header
+    %button.navbar-toggle{'data-target' => '.navbar-ex1-collapse', 'data-toggle' => 'collapse', type: 'button'}
+      %span.sr-only Toggle navigation
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    = link_to root_path do
+      .navbar-brand kollektivLEBEN
+  .collapse.navbar-collapse.navbar-ex1-collapse
+    %ul.nav.navbar-nav.navbar-right
+      %li
+        %a{href: '#'} About

@@ -27,3 +27,7 @@ coverage
 
 # Ignore guard file
 Guardfile
+
+# Ignore byebug-history
+.byebug_history
+

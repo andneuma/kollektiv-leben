@@ -12,5 +12,17 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap.min
 //= require turbolinks
 //= require_tree .
+
+jQuery(function() {
+  jQuery(document).on('mouseover', '.todo-item', function(){
+    jQuery(this).find('a').show();
+    jQuery(this).find('.todo-item-description').show();
+  });
+  jQuery(document).on('mouseout', '.todo-item', function(){
+    jQuery(this).find('a').hide();
+    jQuery(this).find('.todo-item-description').hide();
+  });
+});

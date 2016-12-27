@@ -1,0 +1,2 @@
+var todoListDiv = jQuery('.panel[todo_list_id=<%= @todo_item.todo_list_id %>]');
+todoListDiv.find('.todo-items').append("<%= j render partial: 'todo_item', locals: {item: @todo_item} %>");
