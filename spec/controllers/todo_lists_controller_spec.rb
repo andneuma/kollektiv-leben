@@ -39,43 +39,7 @@ describe TodoListsController do
     end
   end
 
-  context 'GET #show' do
-    it 'assigns the proper todo list to @todo_list' do
-      login
-      get :show, id: todo_list.id, group_id: group.id
-      expect(assigns(:todo_list)).to eq(todo_list)
-    end
-
-    it 'renders the :show template' do
-      login
-      get :show, id: todo_list.id, group_id: group.id
-      expect(response).to render_template :show
-    end
-
-    context 'should reject' do
-      it 'showing other groups todo list' do
-        login
-        get :show, id: other_groups_todo_list.id, group_id: other_group.id
-
-        expect(assigns(:todo_list)).to be_nil
-        expect(response).to redirect_to root_url
-      end
-
-      it 'showing todo list if not signed in' do
-        get :show, id: other_groups_todo_list.id, group_id: other_group.id
-
-        expect(assigns(:todo_list)).to be_nil
-        expect(response).to redirect_to login_url
-      end
-    end
-  end
-
   context 'GET #new' do
-    it 'assigns a new todo list to @todo_list' do
-      xhr :get, :new, group_id: group.id
-      expect(assigns(:todo_list)).to_not be_nil
-    end
-
     it 'renders the :new template' do
       login
       xhr :get, :new, group_id: group.id
@@ -91,6 +55,7 @@ describe TodoListsController do
     end
 
     it 'renders the :edit template' do
+      login
       xhr :get, :edit, id: todo_list.id, group_id: group.id
       expect(response).to render_template 'todo_lists/form_modal'
     end
@@ -100,7 +65,6 @@ describe TodoListsController do
         login
         get :edit, id: other_groups_todo_list.id, group_id: other_group.id
 
-        expect(response).to redirect_to root_url
         expect(flash[:danger]).to match /nicht erlaubt/
       end
 
@@ -122,10 +86,10 @@ describe TodoListsController do
     end
 
     it 'rejects creating todo list if attributes passed are invalid' do
+      login
       expect {
         xhr :post, :create, todo_list: attributes_for(:todo_list, name: 'A'), group_id: group.id 
       }.to change(TodoList,:count).by(0)
-      expect(response).to redirect_to group_todo_lists_url(group)
     end
 
     context 'should reject' do
@@ -133,15 +97,13 @@ describe TodoListsController do
         expect {
           xhr :post, :create, todo_list: attributes_for(:todo_list, name: 'AAA'), group_id: group.id 
         }.to change(TodoList,:count).by(0)
-        expect(response).to redirect_to login_url
       end
 
       it 'creating todo list if attributes passed are invalid' do
         login
         expect {
-          xhr :post, :create, todo_list: attributes_for(:todo_list, name: 'AAA'), group_id: group.id 
+          xhr :post, :create, todo_list: attributes_for(:todo_list, name: 'A'), group_id: group.id 
         }.to change(TodoList,:count).by(0)
-        expect(response).to render_template :new
       end
 
       it 'creating todo lists within other groups' do
@@ -149,7 +111,6 @@ describe TodoListsController do
         expect {
           xhr :post, :create, todo_list: attributes_for(:todo_list, name: 'AAA'), group_id: other_group.id
         }.to change(TodoList, :count).by(0)
-        expect(response).to redirect_to root_url
       end
     end
   end
@@ -157,28 +118,26 @@ describe TodoListsController do
   context 'PATCH #update' do
     it 'should update todo list under valid attribute values' do
       login
-      xhr :patch, :update, id: todo_list.id, todo_list: attributes_for(:todo_list, name: 'AnotherName') 
+      xhr :patch, :update, id: todo_list.id, todo_list: attributes_for(:todo_list, name: 'AnotherName') , group_id: group.id
       expect(TodoList.find(todo_list.id).name).to eq('AnotherName')
     end
 
     context 'should reject update' do
       it 'if attributes passed are invalid' do
         login
-        xhr, :patch, :update, id: todo_list.id, todo_list: attributes_for(:todo_list, name: 'A'), group_id: group.id
+        xhr :patch, :update, id: todo_list.id, todo_list: attributes_for(:todo_list, name: 'A'), group_id: group.id
         expect(TodoList.find(todo_list.id).name).to eq('TestList')
       end
 
       it 'if not signed in' do
         xhr :patch, :update, id: todo_list.id, todo_list: attributes_for(:todo_list, name: 'SomeChange'), group_id: group.id
         expect(TodoList.find(todo_list.id).name).to eq('TestList')
-        expect(response).to redirect_to login_url
       end
 
       it 'of other groups' do
         login
         xhr :patch, :update, id: other_groups_todo_list.id, todo_list: attributes_for(:todo_list, name: 'AnotherName'), group_id: other_group
         expect(TodoList.find(other_groups_todo_list.id).name).not_to eq('AnotherName')
-        expect(response).to redirect_to root_url
       end
     end
   end
@@ -186,24 +145,20 @@ describe TodoListsController do
   context 'GET #destroy' do
     it 'should be possible to destroy todo lists' do
       login
-      xhr, :get, :destroy, id: todo_list.id, group_id: group.id
+      xhr :get, :destroy, id: todo_list.id, group_id: group.id
       expect(TodoList.all).not_to include(todo_list)
-      expect(flash[:warning]).to match /gelöscht/
-      expect(response).to redirect_to todo_lists_url
     end
 
     context 'reject destroy' do
       it 'if not signed in' do
         xhr :get, :destroy, id: todo_list.id, group_id: group.id
         expect(TodoList.all).to include(todo_list)
-        expect(response).to redirect_to login_url
       end
 
       it 'other groups todo lists' do
         login
         xhr :get, :destroy, id: other_groups_todo_list.id, group_id: other_group.id
         expect(TodoList.all).to include(todo_list)
-        expect(response).to redirect_to root_url
       end
     end
   end
