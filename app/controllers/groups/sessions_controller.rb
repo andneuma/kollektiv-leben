@@ -3,9 +3,9 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @group = Group.find_by(name: params[:sessions][:name])
+    @group = Group.find_by(name: params[:session][:name])
 
-    if @group && @group.authenticated?(attribute: "password", token: params[:sessions][:password])
+    if @group && @group.authenticated?(attribute: "password", token: params[:session][:password])
       session[:group_id] = @group.id
       redirect_to root_url
       flash[:success] = 'Herzlich willkommen!'
@@ -24,6 +24,6 @@ class SessionsController < ApplicationController
   private
 
   def session_params
-    params.require(:sessions).permit(:name, :email, :password)
+    params.require(:session).permit(:name, :email, :password)
   end
 end
